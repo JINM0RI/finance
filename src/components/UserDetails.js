@@ -1,24 +1,25 @@
 // src/components/UserDetails.js
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types'; // Import PropTypes
 
-const UserDetails = ({ match }) => {
+import { useParams } from 'react-router-dom'; // Import useParams hook for v6
+
+const UserDetails = () => {
     const [user, setUser] = useState(null);
-    const { name } = match.params;
+    const { username } = useParams(); // Get username parameter from the route
 
     useEffect(() => {
-        fetch(`/api/questions/${name}`)
+        fetch(`/api/questions/${username}`)
             .then(response => response.json())
             .then(data => setUser(data))
             .catch(error => console.error('Error fetching user details:', error));
-    }, [name]);
+    }, [username]);
 
     return (
         <div>
             {user ? (
                 <div>
-                    <h2>User Details</h2>
-                    <p>Name: {user.name}</p>
+                    <h2>User Details for {user.name}</h2>
+                    <p>Username: {user.name}</p>
                     <p>Salary: {user.salary}</p>
                     <p>Rent: {user.rent}</p>
                 </div>
@@ -27,15 +28,6 @@ const UserDetails = ({ match }) => {
             )}
         </div>
     );
-};
-
-// Prop validation
-UserDetails.propTypes = {
-    match: PropTypes.shape({
-        params: PropTypes.shape({
-            name: PropTypes.string.isRequired // Validate the name prop
-        }).isRequired
-    }).isRequired
 };
 
 export default UserDetails;

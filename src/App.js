@@ -1,23 +1,25 @@
-// src/App.js
+// App.js or your router setup file
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-// import FinanceTracker from './components/FinanceTracker';
 import UserQuestions from './components/UserQuestions';
 import UserDetails from './components/UserDetails';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
+import Login from './components/Login';
+import Signup from './components/Signup';
 function App() {
-    return (
-        <Router>
-            <div className="App">
-                <Navbar />
-                <Routes>
-                    <Route path="/sid" component={UserDetails} />
-                    <Route path="/" component={UserQuestions} />
-                </Routes>
-            </div>
-        </Router>
-    );
+  return (
+    <Router>
+      <div className="App">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<UserQuestions />} />
+          <Route path="/:username" element={<UserDetails />} />
+          <Route path='/Login' element={<Login></Login>} ></Route>
+          <Route path='/Signup' element={<Signup></Signup>}></Route>
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
 export default App;

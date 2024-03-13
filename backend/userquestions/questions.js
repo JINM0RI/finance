@@ -5,23 +5,36 @@ const users = require('./users');
 
 // POST endpoint to record user responses
 router.post('/', (req, res) => {
-    const { name, salary, rent } = req.body;
-    // Log user details
-    console.log(`Name: ${name}, Salary: ${salary}, Rent: ${rent}`);
+    const { question, response } = req.body;
+    // Log user response
+    console.log(`Question: ${question}, Response: ${response}`);
     
-    let user = users.find(user => user.name === name); // Find the user object
-    if (!user) {
-        user = { name }; // If user doesn't exist, create it
-        users.push(user);
+    let user1 = users.find(user => user.name === 'user1'); // Find the user1 object if exists
+    if (!user1) {
+        user1 = { name: 'user1' }; // If user1 doesn't exist, create it
+        users.push(user1);
     }
 
-    // Update user object with salary and rent details
-    user.salary = salary;
-    user.rent = rent;
+    // Update user1 object with user response
+    user1[question.toLowerCase()] = response;
 
-    // Log updated users array
-    console.log('Updated users:', users);
-    res.json({ message: 'User details recorded successfully' });
+    // Log users array
+    console.log('users:', users);
+    res.json({ message: 'Response recorded successfully' });
+});
+
+// GET endpoint to retrieve users array
+router.get('/', (req, res) => {
+    res.json(users);
+});
+router.get('/:name', (req, res) => {
+    const { name } = req.params;
+    const user = users.find(user => user.name.toLowerCase() === name.toLowerCase());
+    if (user) {
+        res.json(user);
+    } else {
+        res.status(404).json({ message: 'User not found' });
+    }
 });
 
 module.exports = router;

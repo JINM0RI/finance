@@ -1,6 +1,5 @@
 // src/components/UserQuestions.js
 import React, { useState } from 'react';
-import 'tailwindcss/tailwind.css';
 
 const UserQuestions = () => {
     const [salary, setSalary] = useState('');
@@ -9,7 +8,43 @@ const UserQuestions = () => {
 
     const handleSubmit = async () => {
         try {
-            // Your fetch logic here
+            await fetch('/api/questions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    question: 'Current Salary',
+                    response: salary
+                })
+            });
+
+            await fetch('/api/questions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    question: 'Current Rent',
+                    response: rent
+                })
+            });
+
+            await fetch('/api/questions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    question: 'Name',
+                    response: name
+                })
+            });
+
+            // Reset state after submitting
+            setSalary('');
+            setRent('');
+            setName('');
         } catch (error) {
             console.error('Error recording user responses:', error);
         }
@@ -55,6 +90,7 @@ const UserQuestions = () => {
             </div>
         </div>
     );
+
 };
 
 export default UserQuestions;

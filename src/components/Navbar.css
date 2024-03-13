@@ -11,6 +11,7 @@
 
 .navbar-brand {
     font-size: 1.5rem;
+    padding-right: 10%;
 }
 
 .navbar-nav {
@@ -32,3 +33,10 @@
 .nav-link:hover {
     text-decoration: underline;
 }
+
+.logo{
+    width: 20%;
+    height: 20%;
+    display: inline-block;
+}
+

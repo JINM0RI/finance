@@ -1,5 +1,5 @@
-// src/components/Login.js
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import 'tailwindcss/tailwind.css';
 
 const Login = () => {
@@ -45,6 +45,9 @@ const Login = () => {
                 >
                     Login
                 </button>
+                <div className="mt-4 text-center text-black">
+                    Already logged in? <Link to="/Charts" className="text-blue-400">View Details</Link>
+                </div>
             </form>
         </div>
     );

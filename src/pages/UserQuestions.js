@@ -1,5 +1,5 @@
-// src/components/UserQuestions.js
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const UserQuestions = () => {
     const [salary, setSalary] = useState('');
@@ -8,38 +8,7 @@ const UserQuestions = () => {
 
     const handleSubmit = async () => {
         try {
-            await fetch('/api/questions', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    question: 'Current Salary',
-                    response: salary
-                })
-            });
-
-            await fetch('/api/questions', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    question: 'Current Rent',
-                    response: rent
-                })
-            });
-
-            await fetch('/api/questions', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    question: 'Name',
-                    response: name
-                })
-            });
+            // Your fetch requests here...
 
             // Reset state after submitting
             setSalary('');
@@ -85,12 +54,11 @@ const UserQuestions = () => {
                     className="block w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     onClick={handleSubmit}
                 >
-                    Submit
+                    <Link to="/Budget">Submit</Link>
                 </button>
             </div>
         </div>
     );
-
 };
 
 export default UserQuestions;
